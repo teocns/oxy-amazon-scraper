@@ -1,3 +1,14 @@
+[project]
+name = "amazon-scraper"
+version = "0.1.0"
+description = "A tool for scraping Amazon."
+packages = [
+    { include = "amazon_scraper", from = "src" },
+]
+authors = ["Ignas Šimkūnas <ignassimkunas@gmail.com>"]
+readme = "README.md"
+
+
 [tool.poetry]
 name = "amazon-scraper"
 version = "0.1.0"
@@ -40,8 +51,3 @@ combine_as_imports = true
 profile = "black"
 lines_between_types = 1
 lines_after_imports = 2
-
-
-
-[tool.rye]
-managed = true
