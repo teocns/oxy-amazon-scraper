@@ -17,7 +17,7 @@ dependencies = [
     "webdriver-manager>=4.0.1",
     "pydantic-settings>=2.3.4",
     "selenium-wire>=5.1.0",
-    "blinker<=1.8.0"
+    "blinker<1.8.0"
 ]
 
 [build-system]
