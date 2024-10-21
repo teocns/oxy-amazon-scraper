@@ -1,9 +1,10 @@
 """
-    Module for scraping Amazon product pages.
+Module for scraping Amazon product pages.
 """
 
 import logging
 import time
+import os
 
 from enum import Enum
 from typing import List
@@ -72,7 +73,11 @@ class AmazonScraper:
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
-        service = Service(ChromeDriverManager().install())
+
+        chromedriver_path = (
+            "/usr/bin/chromedriver" if os.path.isfile("/usr/bin/chromedriver") else None
+        )
+        service = Service(chromedriver_path or ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=chrome_options)
         driver.request_interceptor = self._add_headers_to_request
         return driver
@@ -102,6 +107,7 @@ class AmazonScraper:
 
     def _parse_product_data(self, product: WebElement) -> Product:
         """Parses product data from the given product element"""
+
         title_element = product.find_element(By.XPATH, ProductXPath.TITLE)
         title = title_element.text if title_element else None
 
