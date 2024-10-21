@@ -1,39 +1,37 @@
 [project]
 name = "amazon-scraper"
-version = "0.1.0"
 description = "A tool for scraping Amazon."
 packages = [
     { include = "amazon_scraper", from = "src" },
 ]
-authors = ["Ignas Šimkūnas <ignassimkunas@gmail.com>"]
+authors = [{name = "Ignas Šimkūnas", email = "ignassimkunas@gmail.com"}, {name = "Teo", email = "teocns@gmail.com"}]
 readme = "README.md"
+dynamic = ["version"]
+requires-python = ">= 3.11"
 
-
-[tool.poetry]
-name = "amazon-scraper"
-version = "0.1.0"
-description = "A tool for scraping Amazon."
-packages = [
-    { include = "amazon_scraper", from = "src" },
+dependencies = [
+    "pydantic>=2.7.4",
+    "click>=8.1.7",
+    "pandas>=2.2.2",
+    "selenium>=4.22.0",
+    "webdriver-manager>=4.0.1",
+    "pydantic-settings>=2.3.4",
+    "selenium-wire>=5.1.0",
+    "blinker<=1.8.0"
 ]
-authors = ["Ignas Šimkūnas <ignassimkunas@gmail.com>"]
-readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.11"
-pydantic = "^2.7.4"
-click = "^8.1.7"
-pandas = "^2.2.2"
-selenium = "^4.22.0"
-webdriver-manager = "^4.0.1"
-pydantic-settings = "^2.3.4"
-selenium-wire = "^5.1.0"
-blinker="<1.8.0"
-
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/amazon_scraper"]
+
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.mypy]
 files = "."
@@ -51,3 +49,7 @@ combine_as_imports = true
 profile = "black"
 lines_between_types = 1
 lines_after_imports = 2
+
+
+[tool.hatch.version]
+source = "vcs"
